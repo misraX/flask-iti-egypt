@@ -7,6 +7,6 @@ class ContactForm(FlaskForm):
     """
     Our Agency Contact Form.
     """
-    name = StringField('Name', validators=[DataRequired()])
-    email = EmailField('Email', validators=[DataRequired()])
-    message = TextAreaField('Message', validators=[Length(min=5, max=10)])
+    name = StringField('Name', validators=[DataRequired()], id='name')
+    email = EmailField('Email', validators=[DataRequired()], id='mail')
+    message = TextAreaField('Message', validators=[Length(min=5, max=10)], id='message')

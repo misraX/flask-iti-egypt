@@ -826,3 +826,8 @@ height: inherit;
 width: 100%;
 left: 0px;
 }
+
+
+.invalid-feedback {
+	color: red;
+}

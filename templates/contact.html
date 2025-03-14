@@ -16,10 +16,8 @@
                         {{ contact_form.csrf_token }}
                         <!-- Left Inputs -->
                         <div class="col-xs-12 wow animated slideInLeft" data-wow-delay=".5s">
-                            <!-- Name -->
-                            {{ contact_form.name.label }}
 
-                            {{ contact_form.name }}
+                            {{ contact_form.name(class="form", placeholder="name") }}
                             {% if contact_form.errors.get('name') %}
                                 <ul class="errors">
                                     {% for error in contact_form.errors.get('name') %}
@@ -27,8 +25,7 @@
                                     {% endfor %}
                                 </ul>
                             {% endif %}
-                            {{ contact_form.email.label }}
-                            {{ contact_form.email }}
+                            {{ contact_form.email(class="form", placeholder="Email") }}
                             {% if contact_form.name.errors %}
                                 <ul class="errors">
                                     {% for error in contact_form.email.errors %}
@@ -36,7 +33,6 @@
                                     {% endfor %}
                                 </ul>
                             {% endif %}
-                            {{ contact_form.message.label }}
                             {#                            <input type="text" name="name" id="name" required="required" class="form" placeholder="Name" />#}
                             <!-- Email -->
                             {#                            <input type="email" name="mail" id="mail" required="required" class="form" placeholder="Email" />#}
@@ -45,9 +41,9 @@
                         <!-- Right Inputs -->
                         <div class="col-xs-12 wow animated slideInRight" data-wow-delay=".5s">
                             <!-- Message -->
-                            {{ contact_form.message }}
+                            {{ contact_form.message(class="form textarea", placeholder="Message") }}
                             {% if contact_form.errors.get('message') %}
-                                <ul class="errors">
+                                <ul class="invalid-feedback">
                                     {% for error in contact_form.errors.get('message') %}
                                         <li>{{ error }}</li>
                                     {% endfor %}
