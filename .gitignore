@@ -17,3 +17,6 @@ nohup.out
 setuptools-*
 
 .idea/*
+
+# DB
+project.db
