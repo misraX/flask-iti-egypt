@@ -2,9 +2,10 @@ import logging
 import uuid
 
 from flask import Flask
+from pydantic import ValidationError
 
-from views.user import user_blueprint
-from views.webiste_view import website_blueprint
+from views.api.user import user_blueprint
+from views.website_view import website_blueprint
 
 logger = logging.getLogger(__file__)
 
@@ -13,7 +14,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = uuid.uuid4().hex
 app.config['PORT'] = 9080
 
-
+@user_blueprint.app_errorhandler(ValidationError)
+def handle_validation_error(error):
+    """
+    Global Error handler for user blueprint
+    :param error: str(validation error)
+    :return: json
+    """
+    return {"error": str(error)}, 400
 
 def main() -> Flask:
     app.register_blueprint(
@@ -23,13 +31,6 @@ def main() -> Flask:
         user_blueprint
     )
 
-    # with get_session(app.config['SQLALCHEMY_DATABASE_URI']) as session:
-    #     statement = select(User).filter_by(first_name="Maysra")
-    #     rows = session.execute(statement).all()
-    #     for row in rows:
-    #         print(row[0].first_name)
-    #         print(row[0].last_name)
-    #         print(row[0].id)
 
     return app
 

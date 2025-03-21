@@ -1,9 +1,7 @@
 from flask import Blueprint, request
 
-from db.db_session import get_session
-from models.user import User
-from schemas.user import UserSchema
-from services import UserService
+from schemas.request.user import UserRequestSchema
+from services.user_service import UserService
 
 user_blueprint = Blueprint('user', __name__, url_prefix='/user')
 
@@ -25,15 +23,12 @@ def create_user():
 
     :return: json
     """
-    user = User()
-    last_name = request.form['last_name']
-    first_name = request.form['first_name']
-    user.first_name = last_name
-    user.last_name = first_name
-    with get_session() as session:
-        session.add(user)
-        session.commit()
-    return UserSchema(first_name=first_name, last_name=last_name).model_dump()
+    service = UserService()
+    user_request_schema = UserRequestSchema(
+        last_name=request.json['last_name'],
+        first_name=request.json['first_name'],
+    )
+    return service.create_user(user_request_schema)
 
 
 @user_blueprint.route('/<user_id>', methods=['DELETE'])
@@ -55,11 +50,9 @@ def update_user(user_id: int):
 
     :return: json
     """
-    last_name = request.form['last_name']
-    first_name = request.form['first_name']
-    user_schema = UserSchema(
-        first_name=first_name,
-        last_name=last_name,
+    user_schema = UserRequestSchema(
+        first_name=request.json['first_name'],
+        last_name=request.json['last_name'],
     )
     service = UserService()
     return service.update_user(user_id, user_schema)
