@@ -20,3 +20,6 @@ setuptools-*
 
 # DB
 project.db
+
+# mac versions
+.DS_store
