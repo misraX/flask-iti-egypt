@@ -1,0 +1,53 @@
+<div class="row">
+    <form hx-post="/admin/user" hx-swap="innerHTML" hx-target="#user-list-table">
+        <div class="mb-3">
+            {{ user_form.first_name.label(class="form-label") }}
+            {{ user_form.first_name(class="form-control", placeholder="First Name") }}
+            {% if user_form.first_name.errors %}
+                <ul class="errors">
+                    {% for error in first_name.first_name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ user_form.last_name.label(class="form-label") }}
+            {{ user_form.last_name(class="form-control", placeholder="Last Name") }}
+            {% if user_form.last_name.errors %}
+                <ul class="errors">
+                    {% for error in user_form.last_name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            {{ user_form.country.label(class="form-label") }}
+            {{ user_form.country(class="form-control", placeholder="Country ex: Egypt") }}
+            {% if user_form.country.errors %}
+                <ul class="errors">
+                    {% for error in user_form.country.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ user_form.email.label(class="form-label") }}
+            {{ user_form.email(class="form-control", placeholder="foo@bar.com") }}
+            {% if user_form.email.errors %}
+                <ul class="errors">
+                    {% for error in user_form.email.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <div class="mb-12">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

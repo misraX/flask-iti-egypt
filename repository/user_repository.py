@@ -54,6 +54,8 @@ class UserRepository:
         user = User(
             first_name=user_schema.first_name,
             last_name=user_schema.last_name,
+            email=user_schema.email,
+            country=user_schema.country,
         )
         with self.db_session as session:
             session.add(user)

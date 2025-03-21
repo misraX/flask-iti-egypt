@@ -5,6 +5,7 @@ from flask import Flask
 from pydantic import ValidationError
 
 from views.api.user import user_blueprint
+from views.htmx_ui.user import htmx_ui_user_blueprint
 from views.website_view import website_blueprint
 
 logger = logging.getLogger(__file__)
@@ -29,6 +30,9 @@ def main() -> Flask:
     )
     app.register_blueprint(
         user_blueprint
+    )
+    app.register_blueprint(
+        htmx_ui_user_blueprint
     )
 
 

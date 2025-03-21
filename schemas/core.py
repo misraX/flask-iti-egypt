@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel, constr
 
 
@@ -12,3 +14,5 @@ class UserBaseSchema(BaseModel):
         max_length=100,
         pattern='^[a-zA-Z]+$',
     )
+    email: Optional[str]  = None
+    country: Optional[str] = None
